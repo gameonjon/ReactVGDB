@@ -1,0 +1,68 @@
+CREATE TABLE IF NOT EXISTS Publisher(
+    p_pubkey INTEGER PRIMARY KEY AUTO_INCREMENT,
+    p_name VARCHAR(80) UNIQUE NOT NULL
+)
+
+
+CREATE TABLE IF NOT EXISTS Developer(
+    d_devkey INTEGER PRIMARY KEY AUTO_INCREMENT,
+    d_name VARCHAR(80) UNIQUE NOT NULL
+)
+
+CREATE TABLE IF NOT EXISTS Platform(
+    pf_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    pf_system varchar(25) NOT NULL
+)
+
+
+CREATE TABLE IF NOT EXISTS Reviews (
+    r_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    r_rating DECIMAL(3, 1) NOT NULL,
+    r_resource VARCHAR(50) NOT NULL,
+    r_comment VARCHAR(1250)
+)
+
+
+CREATE TABLE IF NOT EXISTS GamePlay(
+    gp_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    gp_url VARCHAR(125) NOT NULL,
+    gp_platform VARCHAR(45)
+)
+
+
+CREATE TABLE IF NOT EXISTS Games(
+    g_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    g_title varchar(80) UNIQUE NOT NULL,
+    g_year DATE NOT NULL,
+    g_genre VARCHAR(55) DEFAULT NULL,
+    g_pubkey INTEGER,
+    FOREIGN KEY (g_pubkey) REFERENCES Publisher(p_pubkey) ON DELETE SET NULL
+)
+
+CREATE TABLE IF NOT EXISTS Contracts(
+    c_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    c_gameID INTEGER,
+    c_devkey INTEGER,
+    FOREIGN KEY (c_gameID) REFERENCES Games(g_id) ON DELETE CASCADE,
+    FOREIGN KEY (c_devkey) REFERENCES Developer(d_devkey) ON DELETE CASCADE
+)
+
+
+CREATE TABLE IF NOT EXISTS GamePlatform(
+    gpf_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    game_id INTEGER,
+    platform_id INTEGER,
+    FOREIGN KEY (game_id) REFERENCES Games(g_id) ON DELETE CASCADE,
+    FOREIGN KEY (platform_id) REFERENCES Platform(pf_id) ON DELETE CASCADE
+)
+
+
+CREATE TABLE IF NOT EXISTS Media(
+    m_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    game_id INTEGER,
+    review_id INTEGER,
+    gameplay_id INTEGER,
+    FOREIGN KEY (game_id) REFERENCES Games(g_id) ON DELETE CASCADE,
+    FOREIGN KEY (review_id) REFERENCES Reviews(r_id) ON DELETE CASCADE,
+    FOREIGN KEY (gameplay_id) REFERENCES GamePlay(gp_id) ON DELETE CASCADE 
+)
