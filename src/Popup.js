@@ -9,6 +9,9 @@ const Popup = ({game, onClose}) => {
     const [platforms, setPlatforms] = useState([]);
     const [pub, setPub] = useState({});
 
+    const imageName = game.g_title.replace(/[\s:]+/g, "_")+".jpg";
+    const imagePath = `/images/${imageName}`;
+
     useEffect(() => {
         //prevent background scrolling when open
         document.body.classList.add("popup-open");
@@ -32,7 +35,7 @@ const Popup = ({game, onClose}) => {
                 setDevs(devsResponse.data);
                 setPlatforms(platResponse.data);
                 setPub(pubResponse.data);
-                console.log(pubResponse.data);
+                // console.log(pubResponse.data);
                 // console.log(platResponse.data);
                 
             })
@@ -53,33 +56,44 @@ const Popup = ({game, onClose}) => {
                     X
                 </button>
 
-                <h1>{game.g_title}</h1>
+                <div>
+                    <h1>{game.g_title}</h1>
 
-                <h3>Publisher</h3>
-                <p>{pub.p_name}</p>
+                    <h3>Publisher</h3>
+                    <p>{pub.p_name}</p>
 
-                <h3>Release Year: </h3>
-                <p>{new Date(game.g_year).getFullYear()}</p>
+                    <h3>Release Year: </h3>
+                    <p>{new Date(game.g_year).getFullYear()}</p>
 
-                <h3>Genre: </h3>
-                <p>{game.g_genre}</p>
+                    <h3>Genre: </h3>
+                    <p>{game.g_genre}</p>
 
-                <h3>Platforms:</h3>
-                <ul>
-                    {platforms.map((plat) => (
-                        <li key={plat.pf_id}>{plat.pf_system}</li>
-                    ))}
-                </ul>
+                    <h3>Platforms:</h3>
+                    <ul>
+                        {platforms.map((plat) => (
+                            <li key={plat.pf_id}>{plat.pf_system}</li>
+                        ))}
+                    </ul>
 
-                <h3>Developers: </h3>
-                <ul>
-                    {devs.map((dev) => (
-                        <li key={dev.d_devkey}>{dev.d_name}</li>
-                    ))}
-                </ul>
+                    <h3>Developers: </h3>
+                    <ul>
+                        {devs.map((dev) => (
+                            <li key={dev.d_devkey}>{dev.d_name}</li>
+                        ))}
+                    </ul>
+
+                </div>
+
+                <img src={imagePath}
+                className="img" 
+                alt={imageName} 
+                onError={(e) => e.target.src = "/default.jpg"} 
+                />      
+
 
                 
             </div>
+            
         </div>
     )
 };

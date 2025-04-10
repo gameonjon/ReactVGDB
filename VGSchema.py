@@ -119,6 +119,7 @@ def createTables(cur, conn):
 
         sql = """CREATE TABLE IF NOT EXISTS Media(
                     m_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+                    image_url VARCHAR(255),
                     game_id INTEGER,
                     review_id INTEGER,
                     gameplay_id INTEGER,
@@ -379,7 +380,7 @@ def populateChildTables(cur, conn):
             #Platform: ps4, xbox1, msw
             ("Call of Duty: Modern Warfare Remastered", '2016-11-04', "shooter", 9, 10012), #, 20018),
             #Platform: ps4, xbox1, msw
-            ("Tom Clancy's Ghost Recon", '2017-03-07', "tactical shooter", 10, 10013), #, 20021),
+            ("Tom Clancy's Ghost Recon: Wildlands", '2017-03-07', "tactical shooter", 10, 10013), #, 20021),
             #Platform: ps4 
             ("Killzone Shadow Fall", '2013-11-15', "shooter", 11, 10005), # , 20024),
             #Platform: ps4
@@ -387,13 +388,13 @@ def populateChildTables(cur, conn):
             #Platform: ps4, msw, xbox1
             ("Star Wars: Battlefront", '2015-11-16', "shooter", 13, 10004), #, 20006),
             #Platform: ps4, msw
-            ("Horizor Zero Dawn", '2017-02-28', "action", 14, 10005), #, 20024),
+            ("Horizon Zero Dawn", '2017-02-28', "action", 14, 10005), #, 20024),
             #Platform: ps4, xbox1, msw
             ("Battlefield 1", '2016-10-21', "shooter", 15, 10004), #, 20006),
             #Platform: ps4, xbox1, msw
             ("Need for Speed", '2015-11-03', "racing", 16, 10004), # , 20026),
             #Platform: ps4
-            ("Spider-Man", '2018-09-07', "action-adventure", 17, 10005), #, 20027),
+            ("Marvel's Spider-Man", '2018-09-07', "action-adventure", 17, 10005), #, 20027),
             #Platform: ps4, xbox1, msw
             ("Call of Duty: Modern Warfare", '2019-08-23', "shooter", 18, 10012), #, 20018)
         ]

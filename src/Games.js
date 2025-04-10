@@ -34,7 +34,7 @@ const Games = () =>{
 
     const handleGameClick = (game) =>{
         setSelectedGame(game); //set selected game, open popup
-        console.log(game);
+        // console.log(game);
     };
 
     const closePopup = () =>{

@@ -90,11 +90,23 @@ nav{
   padding: 1em;
   border-radius: 10px;
   border: 1px solid #f76f02;
+  display: flex;
+  flex-direction: row;
 }
 
 .game-item:hover{
   border: 6px solid #f76f02;
   cursor: pointer;
+}
+
+.game-info{
+  width: 60%;
+}
+
+img{
+  width: 40%;
+  object-fit: contain;
+
 }
 
 .introText{
@@ -138,9 +150,13 @@ nav{
   overflow-y: auto;
   position: relative; /*helps close btn stay in box*/
   scrollbar-width: none;
+  display: flex;
 }
 .dataCont{
   width: 20%;
+}
+.popContent div{
+  width: 58%;
 }
 .popContent h3{
   display: flex;

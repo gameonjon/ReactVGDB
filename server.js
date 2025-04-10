@@ -8,6 +8,33 @@ import Queries from './Queries.js';
 const app = express();
 const PORT = 5000;
 
+//call to scrap img
+import {spawn} from "child_process";
+
+function runScraper(gameName){
+    console.log(`running scraper for : ${gameName}`);
+
+    return new Promise((resolve, reject) =>{
+        const pythonProcess = spawn("python", ["./scraper.py", gameName]);
+
+        pythonProcess.stdout.on("data", (data) =>{
+            console.log(`Python Output: ${data}`);
+        });
+
+        pythonProcess.stderr.on("data", (data) =>{
+            console.error(`Python Error: ${data}`);
+        });
+
+        pythonProcess.on("close", (code) =>{
+            console.log(`Python process exited with code ${code}`);
+            if(code === 0) resolve();
+            else reject(new Error(`Scraper exited with code ${code}`));
+        });
+    });
+    
+    
+}
+
 app.use(cors());
 app.use(express.json()); //middleware to parse JSON requests
     //Java Script Ojbect Notation
@@ -110,6 +137,8 @@ app.post("/api/newGame/", async (req, res) =>{
             platforms: req.body.Platform
         };
 
+        const gameName = data.gameTitle;
+
 
         //Insert game first
         const gameId = await queries.insertNewGame(data.gameTitle, data.year, data.genre);
@@ -143,6 +172,10 @@ app.post("/api/newGame/", async (req, res) =>{
         for(const plat of data.platforms){
             await queries.insertGamePlatform(gameId, plat);
         }
+
+        //run scraper
+        await runScraper(gameName); // await pauses until image is downloaded
+        
  
         return res.json({
             message: "SUCCESS! Inserted new game",
