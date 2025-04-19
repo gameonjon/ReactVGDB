@@ -39,4 +39,4 @@ One publisher per game
 
 Related tables for developers, publishers, platforms
 
-File can be viewed here in [Figma] (https://www.figma.com/design/qi7Mlmhu8rHBzoiVC2bH3o/Untitled?node-id=9-40&t=DOhNCx8NkyjJiYrb-1)
+File can be viewed here in [Figma](https://www.figma.com/design/qi7Mlmhu8rHBzoiVC2bH3o/Untitled?node-id=9-40&t=DOhNCx8NkyjJiYrb-1)
