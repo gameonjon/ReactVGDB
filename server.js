@@ -56,6 +56,25 @@ app.get('/api/games', (req,res) =>{
     });
 });
 
+app.get('/api/menu/title_asc', async (req, res) =>{
+    try{
+        const games = await queries.getGameByTitleASC();
+        res.json(games);
+    } catch (error){
+        console.error('Error fetching ascending titles:', error);
+        res.status(500).json({ error: 'Internal Server Error'});
+    }
+});
+app.get('/api/menu/title_desc', async (req, res) =>{
+    try{
+        const games = await queries.getGameByTitleDesc();
+        res.json(games);
+    } catch (error){
+        console.error('Error fetching descending titles:', error);
+        res.status(500).json({ error: 'Internal Server Error'});
+    }
+});
+
 app.get('/api/pub', (req, res) =>{
     const gameId = req.query.gameId;
     const query = `SELECT Publisher.p_name 

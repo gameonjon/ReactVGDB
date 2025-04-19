@@ -1,4 +1,4 @@
-body{
+body, #body{
   width: 100%;
   height: 100%;
   /* margin: 0px;
@@ -181,7 +181,7 @@ img{
 }
 
 /* prevent background scrolling */
-body.popup-open{
+#body.popup-open{
   overflow: hidden;
 }
 

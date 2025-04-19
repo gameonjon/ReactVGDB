@@ -44,6 +44,34 @@ class Queries {
         });
     }
 
+    getGameByTitleASC(){
+        return new Promise((resolve, reject)=>{
+            this.db.execute(
+                `SELECT * FROM Games
+                    ORDER BY g_title ASC`,
+                (err, result) => {
+                    if(err) reject(err);
+                    else resolve(result);
+                }
+            );
+        });
+
+    }
+
+    getGameByTitleDesc(){
+        return new Promise((resolve, reject)=>{
+            this.db.execute(
+                `SELECT * FROM Games
+                    ORDER BY g_title DESC`,
+                (err, result) => {
+                    if(err) reject(err);
+                    else resolve(result);
+                }
+            );
+        });
+
+    }
+
     insertPublisher(publisher){
         return new Promise((resolve, reject) =>{
             this.db.execute(

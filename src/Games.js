@@ -6,7 +6,7 @@ import Popup from "./Popup.js";
 import './App.css';
 
 
-const Games = () =>{
+const Games = ({gameList}) =>{
 
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true); //handle loading
@@ -32,6 +32,8 @@ const Games = () =>{
         return <p>Loading...</p>;
     }
 
+    const displayGames = gameList && gameList.length > 0 ? gameList : games;
+
     const handleGameClick = (game) =>{
         setSelectedGame(game); //set selected game, open popup
         // console.log(game);
@@ -44,7 +46,7 @@ const Games = () =>{
     return (
         <div>
             <div className="gameList">
-                {games.map((game) =>(
+                {displayGames.map((game) =>(
                     <GameItem key={game.g_id} game={game} onClick={() => handleGameClick(game)}/>
                 ))}
             </div>
